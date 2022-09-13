@@ -1,4 +1,4 @@
-package main
+package docconv
 
 import (
 	"encoding/json"
@@ -76,13 +76,13 @@ func Convert(r io.Reader, mimeType string, readability bool) (*Response, error) 
 		body, meta, err = ConvertODT(r)
 
 	case "application/rtf", "application/x-rtf", "text/rtf", "text/richtext":
-		body, meta, err = ConvertRTF(r)
+		body, meta, err = main.ConvertRTF(r)
 
 	case "text/url":
-		body, meta, err = ConvertURL(r, readability)
+		body, meta, err = main.ConvertURL(r, readability)
 
 	case "text/xml", "application/xml":
-		body, meta, err = ConvertXML(r)
+		body, meta, err = main.ConvertXML(r)
 
 	case "text/plain":
 		var b []byte

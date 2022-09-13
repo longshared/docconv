@@ -1,4 +1,4 @@
-package main
+package docconv
 
 import (
 	"archive/zip"
@@ -32,7 +32,7 @@ func ConvertODT(r io.Reader) (string, map[string]string, error) {
 			}
 			defer rc.Close()
 
-			info, err := XMLToMap(rc)
+			info, err := main.XMLToMap(rc)
 			if err != nil {
 				return "", nil, fmt.Errorf("error parsing '%v': %v", f.Name, err)
 			}
@@ -58,7 +58,7 @@ func ConvertODT(r io.Reader) (string, map[string]string, error) {
 			}
 			defer rc.Close()
 
-			textBody, err = XMLToText(rc, []string{"br", "p", "tab"}, []string{}, true)
+			textBody, err = main.XMLToText(rc, []string{"br", "p", "tab"}, []string{}, true)
 			if err != nil {
 				return "", nil, fmt.Errorf("error parsing '%v': %v", f.Name, err)
 			}

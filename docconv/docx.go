@@ -1,4 +1,4 @@
-package main
+package docconv
 
 import (
 	"archive/zip"
@@ -73,7 +73,7 @@ func ConvertDocx(r io.Reader) (string, map[string]string, error) {
 			}
 			defer rc.Close()
 
-			meta, err = XMLToMap(rc)
+			meta, err = main.XMLToMap(rc)
 			if err != nil {
 				return "", nil, fmt.Errorf("error parsing '%v': %v", f.Name, err)
 			}
@@ -151,5 +151,5 @@ func parseDocxText(f *zip.File) (string, error) {
 
 // DocxXMLToText converts Docx XML into plain text.
 func DocxXMLToText(r io.Reader) (string, error) {
-	return XMLToText(r, []string{"br", "p", "tab"}, []string{"instrText", "script"}, true)
+	return main.XMLToText(r, []string{"br", "p", "tab"}, []string{"instrText", "script"}, true)
 }
